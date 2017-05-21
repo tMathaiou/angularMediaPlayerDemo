@@ -1,12 +1,10 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
-
-import { AppComponent } from './app.component';
-import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { MediaPlayerComponent } from './media-player/media-player.component';
-import {routing} from "./app.routing";
+import {BrowserModule} from "@angular/platform-browser";
+import {NgModule} from "@angular/core";
+import {FormsModule} from "@angular/forms";
+import {HttpModule} from "@angular/http";
+import {AppComponent} from "./app.component";
+import {NavBarComponent} from "./nav-bar/nav-bar.component";
+import {MediaPlayerComponent} from "./media-player/media-player.component";
 import {MediaPlayerService} from "./media-player/media-player.service";
 
 @NgModule({
@@ -18,10 +16,10 @@ import {MediaPlayerService} from "./media-player/media-player.service";
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule,
-    routing
+    HttpModule
   ],
   providers: [MediaPlayerService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

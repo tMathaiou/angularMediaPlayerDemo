@@ -1,6 +1,5 @@
-import {Component, OnInit, OnDestroy, NgZone, ViewChild, ElementRef} from "@angular/core";
-import {Subscription, Observable} from "rxjs";
-import {ActivatedRoute} from "@angular/router";
+import {Component, OnInit, NgZone, ViewChild, ElementRef, Input, SimpleChanges, OnChanges} from "@angular/core";
+import {Observable} from "rxjs";
 import {MediaPlayerService} from "./media-player.service";
 
 declare let videojs;
@@ -10,40 +9,41 @@ declare let videojs;
   templateUrl: './media-player.component.html',
   styleUrls: ['./media-player.component.css']
 })
-export class MediaPlayerComponent implements OnInit, OnDestroy {
+export class MediaPlayerComponent implements OnInit, OnChanges {
   @ViewChild('timeInput') timeInput: ElementRef;
+  @Input("playerName") playerName: any;
 
-  private subscription: Subscription;
   private player: any;
   private intervalHolder: any;
 
   videoLoaded: boolean;
 
-  constructor(private route: ActivatedRoute,
-              private mediaPlayerService: MediaPlayerService,
+  constructor(private mediaPlayerService: MediaPlayerService,
               private ngZone: NgZone) {
   }
 
-  ngOnInit(): void {
-    this.subscription = this.route.params.subscribe(
-      (params: any) => {
-        if (params.hasOwnProperty('videoName')) {
-          this.mediaPlayerService.fetchVideo(params['videoName']).subscribe(
-            video => {
-              this.ngZone.run(() => {
-                this.videoLoaded = true;
-                setTimeout(() => this.initVideoPlayer(video), 0);
-              });
-            }
-          );
-        }
+  ngOnInit() {
+    this.setVideoPlayer(undefined);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (this.playerName) {
+      this.setVideoPlayer(this.playerName);
+    }
+  }
+
+
+  setVideoPlayer(playerName: string) {
+    this.mediaPlayerService.fetchVideo(playerName).subscribe(
+      video => {
+        this.ngZone.run(() => {
+          this.videoLoaded = true;
+          setTimeout(() => this.initVideoPlayer(video), 0);
+        });
       }
     );
   }
 
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
 
   private initVideoPlayer(video: Observable<any>): void {
     if (!this.player) {
@@ -63,11 +63,11 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
       output = '';
 
     if (hrs > 0) {
-      output += `${hrs}:${(mins < 9 ?  "0" : "")}`;
+      output += `${hrs}:${(mins < 9 ? "0" : "")}`;
     }
 
 
-    output += `${mins}:${(Number(secs.toFixed(0)) < 10  ? "0" : "")}`;
+    output += `${mins}:${(Number(secs.toFixed(0)) < 10 ? "0" : "")}`;
     output += secs.toFixed(0);
     return output;
   }

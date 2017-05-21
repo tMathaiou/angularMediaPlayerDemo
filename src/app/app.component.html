@@ -1,2 +1,2 @@
-<mod-nav-bar></mod-nav-bar>
-<router-outlet></router-outlet>
+<mod-nav-bar [player]="videoPlayer" (onVideoChange)="videoChanged($event)"></mod-nav-bar>
+<mod-media-player [playerName]="videoPlayer"></mod-media-player>

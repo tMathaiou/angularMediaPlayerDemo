@@ -20,6 +20,10 @@
   font-weight: bold;
 }
 
+.navbar-nav li a{
+  cursor: pointer;
+}
+
 .nav>li {
   padding-right: 25px;
 }
