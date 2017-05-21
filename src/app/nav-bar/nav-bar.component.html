@@ -1,0 +1,35 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed"
+              aria-controls="navbar" (click)="toggleState()">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">
+        <img src="assets/images/MEDICS-ACADEMY-Logo.png" width="200px"/>
+      </a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse" [ngClass]="{ 'in': isIn }">
+      <ul class="nav navbar-nav navbar-right">
+        <li routerLinkActive="active">
+          <a [routerLink]="['/empowering']">
+            Empowering
+          </a>
+        </li>
+        <li routerLinkActive="active">
+          <a [routerLink]="['/disrupting']">
+            Disrupting
+          </a>
+        </li>
+        <li routerLinkActive="active">
+          <a [routerLink]="['/connecting']">
+            Connecting
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

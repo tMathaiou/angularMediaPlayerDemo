@@ -1,0 +1,21 @@
+#videoPlayer {
+  width: 100%;
+}
+
+.main {
+  margin: 50px 20px;
+  border: 5px solid #7ec3bf;
+}
+
+.video-js {
+  background-color: white;
+}
+
+.current-time {
+  text-align: center;
+  background: #5e5e5d;
+  width: 100px;
+  margin: 0 auto;
+  margin-bottom: 50px;
+  color: #fff;
+}
